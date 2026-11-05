@@ -1,6 +1,6 @@
 """Beardworks(털보네공업사) 로고 — 32×32 도트를 코드로 찍는다. PNG를 손으로 고치지 않고 여기를 고쳐 다시 만든다.
 
-톱니바퀴(공업사) 안에 수염 난 얼굴(털보). 톱니는 극좌표로 계산하고, 얼굴은 아래 글자 격자로 그린다.
+톱니바퀴(공업사) 안에 콧수염·턱수염 난 얼굴(털보 — 사장 본인, 2026-11-05). 톱니는 극좌표로 계산하고, 얼굴은 아래 글자 격자로 그린다.
 
     python3 tools/logo.py        # img/logo.png(32), logo-128.png, logo-256.png, logo-512.png, favicon.png
 """
@@ -26,6 +26,8 @@ PAL = {
     "e": (23, 19, 15),      # 눈
     "w": (236, 229, 218),   # 눈빛
     "r": (214, 112, 96),    # 볼
+    "m": (78, 46, 26),      # 콧수염(턱수염보다 짙게 — 따로 보이게)
+    "n": (122, 76, 44),     # 콧수염 밝은 곳
 }
 
 # 얼굴: 가운데 18×18의 왼쪽 반(9칸). 오른쪽은 거울로 붙인다 — 좌우가 어긋나지 않게.
@@ -39,11 +41,11 @@ FACE_LEFT = """
 ..osseess
 .orssssss
 .osssssss
-.osssbhhb
-.obbbbbbh
-.obhbbBbb
-.oBbbhbbb
-..obbbbhb
+.osssmmmm
+.obmmnnnm
+.obbmmmmB
+.obhbbbbe
+..obbbhbB
 ..oBbbbbb
 ...oBbhbb
 ....oBbbb
