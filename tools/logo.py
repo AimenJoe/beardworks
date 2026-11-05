@@ -1,8 +1,8 @@
 """털보네공업사(Beardworks) 로고 — 32×32 도트를 코드로 찍는다. PNG를 손으로 고치지 않고 여기를 고쳐 다시 만든다.
 
 사장 본인(2026-11-05, 사진 참고): 뒤로 묶은 긴 검은 머리, 짙고 곧은 눈썹, 가는 눈,
-입가를 따라 내려와 턱선 수염과 이어지는 짧은 콧수염·턱수염(덥수룩하지 않다).
-지난 판: v1 둥근 노란 톱니 테두리(해처럼 보였다) → v2 작업 모자 + 덥수룩한 수염(실제와 다름) → v3 지금.
+입가를 따라 내려와 턱선 수염과 이어지는 짧은 콧수염·턱수염(덥수룩하지 않다). 오른쪽 아래 톱니 배지 = 공업사.
+지난 판: v1 둥근 노란 톱니 테두리(해처럼 보였다) → v2 작업 모자 + 덥수룩한 수염(실제와 다름) → v3 사진대로 → v4 손으로 그린 톱니 배지(노랑, 쇳빛은 GEAR_COLOR).
 왼쪽 반(16칸)만 그리고 오른쪽은 거울로 붙인다 — 좌우가 어긋나지 않게.
 
     python3 tools/logo.py        # img/logo.png(32), logo-128.png(Epic 브랜드), logo-256.png, logo-512.png, favicon.png
@@ -25,8 +25,6 @@ PAL = {
     "l": (200, 128, 112),   # 입술
     "m": (52, 42, 42),      # 수염(짧게 — 콧수염이 입가로 내려와 턱선 수염과 이어진다)
     "M": (150, 112, 96),    # 성긴 수염(살에 비치는 곳)
-    "g": (242, 205, 92),    # 톱니(공업사, 반딧불 노랑)
-    "G": (196, 150, 52),    # 톱니 그늘
 }
 
 LEFT = """
@@ -64,37 +62,66 @@ LEFT = """
 ................
 """
 
-# 톱니(공업사): 오른쪽 아래에 작게, 거울로 붙인 뒤 얹는다. 'x'는 구멍(투명).
-GEAR = """
-..o.o..
-.ogogo.
-oggxggo
-.gxxxg.
-oggxGGo
-.oGGGo.
-..o.o..
+# 톱니(공업사): 왼쪽 위 4분의 1(7×7)만 그리고 상하좌우로 뒤집어 14×14를 만든다 — 이 여덟 개가 딱 맞게.
+# 외곽선은 모양 바깥에 1칸 두른다(가는 이가 외곽선에 먹히지 않게) → 16×16. 빛은 왼쪽 위.
+GEAR_Q = """
+.....##
+.....##
+..##.##
+..#####
+...####
+######.
+#####..
 """
-GEAR_AT = None  # 톱니는 v3에서 뺐다(작으면 깨진 표지처럼 보였다) — 넣으려면 (x, y)
+GEAR_COLORS = {
+    "gold": {"g": (242, 205, 92), "H": (255, 238, 170), "G": (190, 140, 46)},
+    "steel": {"g": (150, 156, 168), "H": (214, 220, 228), "G": (92, 98, 112)},
+}
+GEAR_COLOR = "gold"
+GEAR_AT = (16, 16)   # 오른쪽 아래 배지
+FACE_SHIFT = (-3, -2)  # 얼굴을 왼쪽 위로 밀어 톱니와 덜 겹치게
+
+
+def gear() -> Image.Image:
+    q = GEAR_Q.strip("\n").split("\n")
+    top = [r + r[::-1] for r in q]
+    m = [[ch == "#" for ch in row] for row in top + top[::-1]]
+    n = len(m) + 2
+    pal = GEAR_COLORS[GEAR_COLOR]
+
+    def fill(x: int, y: int) -> bool:
+        return 0 <= x - 1 < len(m) and 0 <= y - 1 < len(m) and m[y - 1][x - 1]
+
+    im = Image.new("RGBA", (n, n), (0, 0, 0, 0))
+    px = im.load()
+    for y in range(n):
+        for x in range(n):
+            if fill(x, y):
+                if not fill(x, y - 1) or not fill(x - 1, y):
+                    k = "H"
+                elif not fill(x, y + 1) or not fill(x + 1, y):
+                    k = "G"
+                else:
+                    k = "g"
+                px[x, y] = pal[k] + (255,)
+            elif any(fill(x + i, y + j) for i, j in ((1, 0), (-1, 0), (0, 1), (0, -1))):
+                px[x, y] = PAL["o"] + (255,)
+    return im
 
 
 def draw() -> Image.Image:
-    im = Image.new("RGBA", (N, N), (0, 0, 0, 0))
-    px = im.load()
+    face = Image.new("RGBA", (N, N), (0, 0, 0, 0))
+    px = face.load()
     rows = LEFT.strip("\n").split("\n")
     assert len(rows) == N and all(len(r) == N // 2 for r in rows), "왼쪽 반은 32줄 × 16칸"
     for y, half in enumerate(rows):
         for x, ch in enumerate(half + half[::-1]):
             if ch != ".":
                 px[x, y] = PAL[ch] + (255,)
-    if GEAR_AT is None:
-        return im
-    gx, gy = GEAR_AT
-    for j, row in enumerate(GEAR.strip("\n").split("\n")):
-        for i, ch in enumerate(row):
-            if ch == "x":
-                px[gx + i, gy + j] = (0, 0, 0, 0)
-            elif ch != ".":
-                px[gx + i, gy + j] = PAL[ch] + (255,)
+    im = Image.new("RGBA", (N, N), (0, 0, 0, 0))
+    im.paste(face, FACE_SHIFT, face)  # 음수 자리도 되게 paste(넘친 칸은 잘린다)
+    if GEAR_AT is not None:
+        im.alpha_composite(gear(), GEAR_AT)
     return im
 
 
