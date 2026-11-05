@@ -1,0 +1,64 @@
+/* Beardworks 회사 페이지. 색은 Naïl 공식 페이지(nail-under-the-roots/site/style.css)의 흙·반딧불 색을 그대로 쓴다. */
+@font-face {
+  font-family: "Galmuri11";
+  src: url("fonts/galmuri11-sub.woff2") format("woff2");
+  font-display: swap;
+}
+:root {
+  --soil: #17130f;
+  --soil-2: #221c16;
+  --soil-3: #34291f;
+  --core: #09080c;
+  --text: #ece5da;
+  --muted: #b8ab9b;
+  --moss: #9cc46e;
+  --glow: #f2cd5c;
+  --f-pixel: "Galmuri11", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  --f-body: system-ui, -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", "Segoe UI", sans-serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { background: var(--core); }
+body { margin: 0; background: var(--soil); color: var(--text); font-family: var(--f-body); font-size: 17px; line-height: 1.7; overflow-x: hidden; }
+img { max-width: 100%; height: auto; display: block; }
+.px { image-rendering: pixelated; image-rendering: crisp-edges; }
+a { color: var(--glow); }
+a:focus-visible { outline: 2px solid var(--glow); outline-offset: 3px; }
+.skip { position: absolute; left: -999px; top: 0; z-index: 50; background: var(--glow); color: var(--soil); padding: .4rem .8rem; }
+.skip:focus { left: 8px; top: 8px; }
+.wrap { max-width: 52rem; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1, h2, h3, .brand, .tag { font-family: var(--f-pixel); font-weight: 400; letter-spacing: .01em; text-wrap: balance; }
+
+.top { border-bottom: 1px solid rgba(255, 255, 255, .06); }
+.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: .4rem 1rem; padding-block: .7rem; flex-wrap: wrap; }
+.brand { font-size: 1.25rem; color: var(--text); text-decoration: none; }
+.top nav { display: flex; gap: .3rem 1.1rem; flex-wrap: wrap; font-size: .95rem; }
+.top nav a { color: var(--muted); text-decoration: none; }
+.top nav a:hover { color: var(--text); }
+.top nav .lang { color: var(--glow); }
+
+main { padding-block: 2.6rem 3.4rem; }
+.tag { color: var(--moss); font-size: .9rem; letter-spacing: .08em; margin: 0; }
+h1 { font-size: clamp(1.8rem, 5vw, 2.6rem); line-height: 1.25; margin: .3rem 0 .6rem; }
+h2 { font-size: 1.35rem; margin: 2.4rem 0 .7rem; }
+h3 { font-size: 1.1rem; margin: 1.3rem 0 .3rem; color: var(--glow); }
+.lede { font-size: 1.1rem; color: var(--text); max-width: 38rem; }
+.meta { color: var(--muted); font-size: .92rem; margin: 0; }
+ul { padding-left: 1.2rem; }
+li + li { margin-top: .35rem; }
+
+.game { display: grid; gap: 1rem 1.4rem; background: var(--soil-2); border: 1px solid var(--soil-3); border-radius: 6px; padding: 1rem; }
+@media (min-width: 720px) { .game { grid-template-columns: 22rem 1fr; align-items: start; } }
+.game img { border-radius: 4px; width: 100%; }
+.game h3 { margin-top: 0; color: var(--text); font-size: 1.3rem; }
+.game p { margin: .3rem 0 .7rem; }
+.links { display: flex; flex-wrap: wrap; gap: .5rem; margin: 0; padding: 0; list-style: none; }
+.links li + li { margin-top: 0; }
+.links a, .links span { display: inline-block; font-family: var(--f-pixel); text-decoration: none; padding: .35rem .8rem; border-radius: 4px; border: 1px solid var(--soil-3); color: var(--text); background: var(--soil); }
+.links a.main { background: var(--glow); color: var(--soil); border-color: var(--glow); }
+.links span { color: var(--muted); }
+.note { color: var(--muted); font-size: .88rem; }
+
+footer { padding-block: 2rem 2.6rem; color: var(--muted); font-size: .86rem; border-top: 1px solid var(--soil-3); }
+footer a { color: var(--muted); }
+footer p { margin: .3rem 0; }
