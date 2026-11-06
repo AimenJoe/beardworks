@@ -15,6 +15,13 @@ const img = path.join(__dirname, '..', 'img');
       await p.screenshot({ path: path.join(img, `${name}-${s}.png`), omitBackground: true });
     }
   }
+  // 프로필 그림 400×400(상점·SNS 프로필 — 원형으로 잘려도 상징이 원 안에)
+  {
+    const svg = fs.readFileSync(path.join(img, 'profile.svg'), 'utf8');
+    await p.setViewportSize({ width: 400, height: 400 });
+    await p.setContent(`<html><body style="margin:0"><img style="display:block" width="400" height="400" src="data:image/svg+xml;base64,${Buffer.from(svg).toString('base64')}"></body></html>`);
+    await p.screenshot({ path: path.join(img, 'profile-400.png') });
+  }
   fs.copyFileSync(path.join(img, 'logo-tile-32.png'), path.join(img, 'favicon.png'));
   await b.close();
 })();
