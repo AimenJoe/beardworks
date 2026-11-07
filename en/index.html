@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Beardworks</title>
-<meta name="description" content="Beardworks is a one-person IT development company from South Korea. We build software, including the game Naïl: Under the Roots.">
+<meta name="description" content="Beardworks is a one-person IT development company from South Korea. We build apps, web and server software and AI services — and the games Naïl: Under the Roots and Knellroot.">
 <link rel="icon" href="../img/logo-tile.svg" type="image/svg+xml">
 <link rel="icon" href="../img/favicon.png" type="image/png">
 <link rel="alternate" hreflang="ko" href="https://beardworks.io/">
@@ -22,10 +22,9 @@
   <div class="wrap">
     <a class="brand" href="./"><img src="../img/logo-tile.svg" alt="" width="32" height="32">Beardworks</a>
     <nav aria-label="On this page">
-      <a href="#maker">About</a>
       <a href="#games">Work</a>
+      <a href="#hire">Hire us</a>
       <a href="#contact">Contact</a>
-      <a href="#hire">Hire</a>
       <a href="privacy.html">Privacy</a>
       <a class="lang" href="../" hreflang="ko" lang="ko">한국어</a>
     </nav>
@@ -33,25 +32,27 @@
 </header>
 
 <main id="main">
+  <section class="hero">
+    <div class="wrap">
+      <img class="logo" src="../img/logo-tile.svg" alt="Beardworks logo: a face made of curly braces, console-prompt eyes, a wrench mustache and a gear beard" width="160" height="160">
+      <div>
+        <p class="tag">IT development · 털보네공업사</p>
+        <h1>Beardworks</h1>
+        <p class="lede">Beardworks (털보네공업사, “the bearded one’s workshop”) is a one-person IT development company, a sole proprietorship from South Korea. We build apps, web and server software and AI services — and, among other things, small, cute games. Our source code is public.</p>
+        <ul class="links">
+          <li><a class="main" href="#games">See our work</a></li>
+          <li><a href="#hire">Hire us</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
   <div class="wrap">
-    <img class="logo" src="../img/logo-tile.svg" alt="Beardworks logo: a face made of curly braces, console-prompt eyes, a wrench mustache and a gear beard" width="128" height="128">
-    <p class="tag">IT development · 털보네공업사</p>
-    <h1>Beardworks</h1>
-    <p class="lede">Beardworks (털보네공업사, “the bearded one’s workshop”) is a one-person IT development company, a sole proprietorship from South Korea. We build software — and, among other things, small, cute games. Our source code is public.</p>
-
-    <h2 id="maker">Who makes it</h2>
-    <p>Beardworks is run by one person: a full-stack developer who has been building software since 2010.</p>
-    <ul>
-      <li>Mobile apps and SDKs (iOS, Android), web front ends and back-end servers</li>
-      <li>LLM and AI services since 2023 — RAG search, agents, data and ML pipelines</li>
-      <li>Sets up build-and-release automation (CI/CD) for apps, SDKs, web and servers end to end</li>
-      <li>Has built and led apps and services for home appliances, energy, retail and the public sector; holds one patent (a beacon-based service system)</li>
-    </ul>
-
     <h2 id="games">Work</h2>
     <article class="game">
-      <img class="px" src="../img/nail.png" alt="A sunset meadow above a burrow where a baby mole sleeps beside a jar of glowbugs; on the right, a great tree with purple threads tangled in its roots" width="640" height="360">
+      <img class="px" src="../img/nail.png" alt="A sunset meadow above a burrow where a baby mole sleeps beside a jar of glowbugs; on the right, a great tree with purple threads tangled in its roots" width="640" height="360" loading="lazy">
       <div>
+        <p class="status">Playable · Web · Android · PC</p>
         <h3>Naïl: Under the Roots</h3>
         <p>A top-down action roguelite about Naïl, a baby mole who follows the roots of a withering great tree deep underground. Fight with parries and rhythm, free the neighbors bound by threads, and bring them home to the village. Available in eleven languages.</p>
         <ul class="links">
@@ -63,21 +64,37 @@
       </div>
     </article>
 
-    <h2 id="contact">Contact</h2>
-    <ul>
-      <li>Email: <a href="mailto:support@beardworks.io">support@beardworks.io</a></li>
-      <li>Bugs and feedback: <a href="https://github.com/AimenJoe/nail-under-the-roots/issues">GitHub Issues</a></li>
-    </ul>
+    <article class="game">
+      <img src="../img/knellroot.jpg" alt="A ruined sanctuary courtyard in dusky violet light; a small hooded raccoon faces a stone guardian with a glowing core in its chest" width="640" height="360" loading="lazy">
+      <div>
+        <p class="status dev">In development · Web · Android dev builds</p>
+        <h3>Knellroot</h3>
+        <p>A low-poly 3D action RPG about a small hooded raccoon who follows the sound of a bell deep underground. Sweep through hordes in a quarter view, then lock on and the camera drops over your shoulder for a one-on-one duel with a towering guardian. Set in the same world as Naïl, long, long after.</p>
+        <ul class="links">
+          <li><a class="main" href="https://knellroot.beardworks.io/en/">About the game</a></li>
+          <li><a href="https://github.com/AimenJoe/knellroot">Source code</a></li>
+        </ul>
+        <p class="note">The 3D models of the wanderer, enemies and guardian were made from originals generated with a Google Gemini image model, turned into 3D with Meshy, then reduced and touched up.</p>
+      </div>
+    </article>
 
-    <h2 id="hire">Work with us</h2>
-    <p>We take on software development projects and technical consulting.</p>
-    <ul>
-      <li>Mobile apps (iOS, Android), web and server development</li>
-      <li>LLM and AI services — RAG search, chatbots, agents</li>
-      <li>Build-and-release automation (CI/CD) and development environment setup</li>
-      <li>Technical reviews and advice</li>
+    <h2 id="hire">Hire us</h2>
+    <p class="intro">Beardworks is run by one person: a full-stack developer who has been building software since 2010 and has built and led apps and services for home appliances, energy, retail and the public sector (holder of one patent, a beacon-based service system). We take on development projects and technical consulting.</p>
+    <ul class="services">
+      <li><b>Mobile apps · SDKs</b><span>iOS and Android apps, and SDKs that ship inside other apps.</span></li>
+      <li><b>Web · servers</b><span>Web front ends, back-end servers and the APIs between them.</span></li>
+      <li><b>LLM · AI services</b><span>Since 2023. RAG search, chatbots, agents, data and ML pipelines.</span></li>
+      <li><b>Build · release automation</b><span>CI/CD for apps, SDKs, web and servers, and development environment setup. The games on this page ship that way too.</span></li>
+      <li><b>Technical review · advice</b><span>Design and code reviews, technology choices, scoping and scheduling.</span></li>
     </ul>
-    <p>Email what you would like to build and your timeline to <a href="mailto:business@beardworks.io">business@beardworks.io</a>, and we will reply after looking at the scope and schedule.</p>
+    <p class="ask">Email what you would like to build and your timeline to <a href="mailto:business@beardworks.io">business@beardworks.io</a>, and we will reply after looking at the scope and schedule.</p>
+
+    <h2 id="contact">Contact</h2>
+    <dl class="contact">
+      <dt>Projects · consulting</dt><dd><a href="mailto:business@beardworks.io">business@beardworks.io</a></dd>
+      <dt>Game questions · support</dt><dd><a href="mailto:support@beardworks.io">support@beardworks.io</a></dd>
+      <dt>Bugs · feedback</dt><dd>GitHub Issues — <a href="https://github.com/AimenJoe/nail-under-the-roots/issues">Naïl</a> · <a href="https://github.com/AimenJoe/knellroot/issues">Knellroot</a></dd>
+    </dl>
   </div>
 </main>
 
