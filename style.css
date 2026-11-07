@@ -19,7 +19,7 @@
 }
 * { box-sizing: border-box; }
 html { background: var(--core); }
-body { margin: 0; background: var(--soil); color: var(--text); font-family: var(--f-body); font-size: 17px; line-height: 1.7; overflow-x: hidden; }
+body { margin: 0; background: var(--soil); color: var(--text); font-family: var(--f-body); font-size: 17px; line-height: 1.7; overflow-x: hidden; overflow-wrap: anywhere; }
 img { max-width: 100%; height: auto; display: block; }
 .px { image-rendering: pixelated; image-rendering: crisp-edges; }
 a { color: var(--glow); }
