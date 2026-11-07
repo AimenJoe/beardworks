@@ -33,13 +33,20 @@ h1, h2, h3, .brand, .tag { font-family: var(--f-pixel); font-weight: 400; letter
 .top .wrap { display: flex; align-items: center; justify-content: space-between; gap: .4rem 1rem; padding-block: .7rem; flex-wrap: wrap; }
 .brand { font-size: 1.25rem; color: var(--text); text-decoration: none; display: flex; align-items: center; gap: .5rem; }
 .brand img { width: 32px; height: 32px; }
-main .logo { width: 128px; height: 128px; margin-bottom: .8rem; }
 .top nav { display: flex; gap: .3rem 1.1rem; flex-wrap: wrap; font-size: .95rem; }
 .top nav a { color: var(--muted); text-decoration: none; }
 .top nav a:hover { color: var(--text); }
 .top nav .lang { color: var(--glow); }
 
-main { padding-block: 2.6rem 3.4rem; }
+main { padding-block: 0 3.4rem; }
+
+/* 첫 화면: 넓으면 로고 왼쪽 + 글 오른쪽, 좁으면 위아래. */
+.hero { padding-block: 2.6rem 2.2rem; background: radial-gradient(60rem 22rem at 18% 0%, rgba(242, 205, 92, .07), transparent 70%); border-bottom: 1px solid var(--soil-3); }
+.hero .wrap { display: grid; gap: 1rem 2rem; align-items: center; }
+@media (min-width: 720px) { .hero .wrap { grid-template-columns: 160px 1fr; } }
+.hero .logo { width: 128px; height: 128px; }
+@media (min-width: 720px) { .hero .logo { width: 160px; height: 160px; } }
+.hero .links { margin-top: 1rem; }
 .tag { color: var(--moss); font-size: .9rem; letter-spacing: .08em; margin: 0; }
 h1 { font-size: clamp(1.8rem, 5vw, 2.6rem); line-height: 1.25; margin: .3rem 0 .6rem; }
 h2 { font-size: 1.35rem; margin: 2.4rem 0 .7rem; }
@@ -49,6 +56,7 @@ h3 { font-size: 1.1rem; margin: 1.3rem 0 .3rem; color: var(--glow); }
 ul { padding-left: 1.2rem; }
 li + li { margin-top: .35rem; }
 
+.game + .game { margin-top: 1rem; }
 .game { display: grid; gap: 1rem 1.4rem; background: var(--soil-2); border: 1px solid var(--soil-3); border-radius: 6px; padding: 1rem; }
 @media (min-width: 720px) { .game { grid-template-columns: 22rem 1fr; align-items: start; } }
 .game img { border-radius: 4px; width: 100%; }
@@ -64,3 +72,23 @@ li + li { margin-top: .35rem; }
 footer { padding-block: 2rem 2.6rem; color: var(--muted); font-size: .86rem; border-top: 1px solid var(--soil-3); }
 footer a { color: var(--muted); }
 footer p { margin: .3rem 0; }
+
+/* 게임 카드의 상태 한 줄: 초록 = 할 수 있음, 반딧불 = 개발 중. */
+.status { font-family: var(--f-pixel); font-size: .82rem; letter-spacing: .04em; color: var(--moss); margin: 0 0 .2rem; }
+.status::before { content: "● "; }
+.status.dev { color: var(--glow); }
+
+/* 일 맡기기: 만드는 사람 소개 한 단락 + 맡는 일 칸. */
+.intro { max-width: 42rem; }
+.services { list-style: none; padding: 0; margin: 1rem 0; display: grid; gap: .7rem; }
+@media (min-width: 620px) { .services { grid-template-columns: 1fr 1fr; } }
+.services li { margin: 0; background: var(--soil-2); border: 1px solid var(--soil-3); border-radius: 6px; padding: .8rem 1rem; }
+.services b { display: block; font-family: var(--f-pixel); font-weight: 400; color: var(--glow); margin-bottom: .15rem; }
+.services span { color: var(--muted); font-size: .95rem; }
+.ask { border-left: 3px solid var(--glow); padding-left: .9rem; }
+
+.contact { display: grid; grid-template-columns: max-content 1fr; gap: .4rem 1.2rem; margin: 0; }
+.contact dt { color: var(--muted); }
+.contact dd { margin: 0; }
+@media (max-width: 480px) { .contact { grid-template-columns: 1fr; } .contact dd { margin-bottom: .5rem; } }
+@media (min-width: 620px) { .services li:last-child:nth-child(odd) { grid-column: 1 / -1; } }
