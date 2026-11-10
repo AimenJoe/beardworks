@@ -4,7 +4,7 @@
 색은 한 가지(#17130F). 요소가 겹치는 곳은 흰 틈(GAP)으로 가른다 — 앞 요소(렌치·중괄호)를 틈만큼 두껍게 그린 마스크로 톱니를 깎는다.
 모든 선 굵기는 U 하나. 사람 얼굴 비율: 눈 ≈ 40%, 콧수염 ≈ 57%, 턱 끝 ≈ 89%.
 
-    python3 tools/logo_svg.py   # img/logo.svg (+ 색 바꾼 판 logo-white.svg·logo-tile.svg)
+    python3 tools/logo_svg.py   # img/logo.svg (+ 색 바꾼 판 logo-white.svg·logo-tile.svg, 프로필 profile.svg)
 """
 import math
 from pathlib import Path
@@ -107,12 +107,22 @@ def svg(ink: str = INK, bg: str | None = None) -> str:
             f'<title>Beardworks 털보네공업사</title><defs></defs>{back}{gear_g}{wrench_g}{braces}{eyes}</svg>\n')
 
 
+def profile_svg(scale: float = 0.74) -> str:
+    """프로필 그림(정사각 전체 노랑 + 가운데 상징). 원형으로 잘려도 상징이 원 안에 들어오게 줄인다."""
+    inner = svg(INK).split(">", 1)[1].rsplit("</svg>", 1)[0]  # <svg ...> 껍데기를 벗긴 내용
+    off = 50 * (1 - scale)
+    return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="400" height="400">'
+            f'<rect width="100" height="100" fill="#F2CD5C"/>'
+            f'<g transform="translate({off:.2f} {off:.2f}) scale({scale})">{inner}</g></svg>\n')
+
+
 def main() -> None:
     out = ROOT / "img"
     out.mkdir(exist_ok=True)
     (out / "logo.svg").write_text(svg(), encoding="utf-8")
     (out / "logo-white.svg").write_text(svg("#FFFFFF"), encoding="utf-8")
     (out / "logo-tile.svg").write_text(svg(INK, "#F2CD5C"), encoding="utf-8")
+    (out / "profile.svg").write_text(profile_svg(), encoding="utf-8")
 
 
 if __name__ == "__main__":
