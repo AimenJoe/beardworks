@@ -68,6 +68,8 @@ li + li { margin-top: .35rem; }
 .links a.main { background: var(--glow); color: var(--soil); border-color: var(--glow); }
 .links span { color: var(--muted); }
 .note { color: var(--muted); font-size: .88rem; }
+.thanks { margin: .9rem 0 0; padding-top: .7rem; border-top: 1px dashed var(--soil-3); color: var(--text); }
+.thanks b { font-family: var(--f-pixel); font-weight: 400; color: var(--glow); margin-right: .5rem; }
 
 footer { padding-block: 2rem 2.6rem; color: var(--muted); font-size: .86rem; border-top: 1px solid var(--soil-3); }
 footer a { color: var(--muted); }
