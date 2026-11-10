@@ -16,7 +16,7 @@ python3 tools/subset_font.py ../nail-under-the-roots/assets/fonts/Galmuri11-Cond
 
 ```sh
 python3 tools/logo_svg.py && node tools/render_logo.js
-node tools/render_banner.js   # 배너(글꼴은 게임의 Galmuri11)
+node tools/render_banner.js   # 배너 1500×500 + 링크 미리보기 og-1200x630(글꼴은 게임의 Galmuri11)
 ```
 
 글꼴: [Galmuri](https://github.com/quiple/galmuri)(SIL OFL 1.1, `fonts/OFL.md`). 게임 그림(`img/nail.png`)은 Naïl 공식 페이지의 것과 같다. `img/knellroot.jpg`는 Knellroot 소개 페이지의 `site/img/s_duel.png`(게임 화면)를 640×360으로 줄인 것.
