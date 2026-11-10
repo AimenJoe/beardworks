@@ -1,0 +1,6 @@
+# beardworks.io — 페이지만 색인, 작업 파일(도구·문서)은 빼기
+User-agent: *
+Disallow: /tools/
+Disallow: /*.md$
+
+Sitemap: https://beardworks.io/sitemap.xml
