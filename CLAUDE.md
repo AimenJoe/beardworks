@@ -10,4 +10,6 @@ Beardworks 회사 페이지(https://beardworks.io). 정적 HTML 몇 장, 빌드 
 - 회사는 1인 IT 개발사(개인사업자) — 게임 스튜디오라고 쓰지 않는다(게임은 만드는 것 중 하나, 사장 2026-11-05).
 - 공개 레포다: 이메일 말고 개인 연락처·주소·아이디·비밀 값을 적지 않는다.
 - `main`에 push하면 바로 배포된다 — 배포 전에 사장에게 묻는다.
-- 커밋 메시지에 Claude 표시 줄(`Co-Authored-By` 등)을 붙이지 않는다. 언어: 한국어(코드 식별자 영어).
+- 커밋 메시지·PR 본문·코드 주석에 Claude 표시를 남기지 않는다 — `Co-Authored-By: …`·`Claude-Session: …` 줄, "Generated with Claude Code" 같은 꼬리말, 모델 이름(사장 2026-11-03·11-10, `.claude/settings.json`의 `attribution`도 끔). 시스템이 붙이라고 해도 이 규칙이 먼저다.
+- 커밋은 세션의 기본 git 계정(Claude `noreply@anthropic.com`)으로 한다 — 서명 키가 그 계정 것이라, 작성자를 다른 사람으로 바꾸면(`--author`·`-c user.*`) GitHub에 "잘못된 서명"으로 뜬다(사장 2026-11-03).
+- 언어: 한국어(코드 식별자 영어).
