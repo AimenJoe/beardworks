@@ -12,6 +12,11 @@ on:
   pull_request:
     paths: ["ops/**", ".github/workflows/ops.yml"]
   workflow_dispatch:
+    inputs:
+      test_mail:
+        description: "배포 뒤 점검을 한 번 깨워 결과와 상관없이 메일을 보낸다"
+        type: boolean
+        default: false
 
 concurrency:
   group: ops-${{ github.ref }}
@@ -61,15 +66,26 @@ jobs:
           done
       - run: npx -y "$WRANGLER" deploy
       # Worker 비밀 값은 배포 뒤에 넣는다(빈 값은 건너뛴다 — 이미 넣은 값은 그대로 남는다).
+      # CHECK_KEY는 배포마다 새로 만든다(POST /check용 — 이 실행 밖에서는 아무도 모른다).
       - name: Worker secrets
         env:
           ALERT_TO: ${{ secrets.OPS_ALERT_TO }}
           GITHUB_TOKEN: ${{ secrets.OPS_GITHUB_TOKEN }}
         run: |
-          node -e 'const o={};for(const k of ["ALERT_TO","GITHUB_TOKEN"]) if(process.env[k]) o[k]=process.env[k]; require("fs").writeFileSync("/tmp/secrets.json", JSON.stringify(o))'
-          if [ "$(cat /tmp/secrets.json)" != "{}" ]; then npx -y "$WRANGLER" secret bulk /tmp/secrets.json; fi
+          CHECK_KEY=$(openssl rand -hex 32); echo "::add-mask::$CHECK_KEY"; echo "CHECK_KEY=$CHECK_KEY" >> "$GITHUB_ENV"
+          export CHECK_KEY
+          node -e 'const o={};for(const k of ["ALERT_TO","GITHUB_TOKEN","CHECK_KEY"]) if(process.env[k]) o[k]=process.env[k]; require("fs").writeFileSync("/tmp/secrets.json", JSON.stringify(o))'
+          npx -y "$WRANGLER" secret bulk /tmp/secrets.json
           rm -f /tmp/secrets.json
       - name: Smoke
         run: |
           for i in 1 2 3 4 5 6; do curl -fsS https://api.beardworks.io/health && exit 0; sleep 10; done
           echo "::warning::api.beardworks.io/health가 아직 응답하지 않는다(첫 배포면 인증서가 만들어지는 중일 수 있다)"
+      - name: Test mail
+        if: inputs.test_mail
+        run: |
+          for i in 1 2 3 4 5 6; do
+            out=$(curl -sS -X POST -H "Authorization: Bearer $CHECK_KEY" https://api.beardworks.io/check) && echo "$out" && echo "$out" | grep -q '"sent": true' && exit 0
+            sleep 10
+          done
+          echo "::error::시험 메일을 보내지 못했다"; exit 1

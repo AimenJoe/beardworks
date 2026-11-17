@@ -22,6 +22,8 @@
 
 `GET /health` → `ok`.
 
+`POST /check`(헤더 `Authorization: Bearer <CHECK_KEY>`) — 지금 점검하고 결과와 상관없이 메일(시험 발송). `CHECK_KEY`는 배포마다 CI가 새로 만들어 넣으므로 쓰는 길은 하나: Actions → ops → Run workflow에서 **test_mail** 켜기.
+
 ## 돌려 보기
 ```sh
 cd ops

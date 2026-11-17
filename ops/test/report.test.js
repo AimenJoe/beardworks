@@ -30,3 +30,11 @@ test("월요일엔 이상이 없어도 살아 있음 메일", () => {
   const m = compose([{ ok: true, what: "a" }], MON);
   assert.match(m.subject, /이상 없음/);
 });
+
+test("손으로 깨우는 점검은 키가 없거나 틀리면 403", async () => {
+  const { manualCheck } = await import("../src/index.js");
+  const req = (h) => new Request("https://api.beardworks.io/check", { method: "POST", headers: h });
+  assert.equal((await manualCheck(req({}), { CHECK_KEY: "k" }, {})).status, 403);
+  assert.equal((await manualCheck(req({ Authorization: "Bearer x" }), { CHECK_KEY: "k" }, {})).status, 403);
+  assert.equal((await manualCheck(req({ Authorization: "Bearer k" }), {}, {})).status, 403, "키가 설정되지 않았으면 언제나 거절");
+});
