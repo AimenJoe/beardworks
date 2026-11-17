@@ -1,0 +1,75 @@
+name: ops
+# beardworks-ops Worker(ops/): 시험은 PR·push마다, 배포는 main에서만.
+# 시크릿은 GitHub Environment `ops`(main만 허용)에 두고 deploy 잡만 읽는다 — nail의 "파이프라인 지키기"와 같은 꼴.
+#   CLOUDFLARE_API_TOKEN   Workers 편집 권한만(Edit Cloudflare Workers 틀)
+#   CLOUDFLARE_ACCOUNT_ID  Cloudflare 계정 ID
+#   OPS_ALERT_TO           알림 받을 메일(Email Routing에서 확인된 메일함)
+#   OPS_GITHUB_TOKEN       GitHub 공개 데이터 읽기용 fine-grained 토큰(권한 없음 = 공개 레포 읽기만) — 익명은 공유 IP에서 막힌다
+on:
+  push:
+    branches: [main]
+    paths: ["ops/**", ".github/workflows/ops.yml"]
+  pull_request:
+    paths: ["ops/**", ".github/workflows/ops.yml"]
+  workflow_dispatch:
+
+concurrency:
+  group: ops-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  WRANGLER: wrangler@4.156.2
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    defaults:
+      run:
+        working-directory: ops
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 22
+      - run: node --test test/*.test.js
+      - run: npx -y "$WRANGLER" deploy --dry-run --outdir /tmp/ops-dist
+
+  deploy:
+    needs: test
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    environment: ops
+    permissions:
+      contents: read
+    defaults:
+      run:
+        working-directory: ops
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 22
+      - name: Require secrets
+        run: |
+          for v in CLOUDFLARE_API_TOKEN CLOUDFLARE_ACCOUNT_ID; do
+            [ -n "${!v}" ] || { echo "::error::$v가 Environment ops에 없다"; exit 1; }
+          done
+      - run: npx -y "$WRANGLER" deploy
+      # Worker 비밀 값은 배포 뒤에 넣는다(빈 값은 건너뛴다 — 이미 넣은 값은 그대로 남는다).
+      - name: Worker secrets
+        env:
+          ALERT_TO: ${{ secrets.OPS_ALERT_TO }}
+          GITHUB_TOKEN: ${{ secrets.OPS_GITHUB_TOKEN }}
+        run: |
+          node -e 'const o={};for(const k of ["ALERT_TO","GITHUB_TOKEN"]) if(process.env[k]) o[k]=process.env[k]; require("fs").writeFileSync("/tmp/secrets.json", JSON.stringify(o))'
+          if [ "$(cat /tmp/secrets.json)" != "{}" ]; then npx -y "$WRANGLER" secret bulk /tmp/secrets.json; fi
+          rm -f /tmp/secrets.json
+      - name: Smoke
+        run: |
+          for i in 1 2 3 4 5 6; do curl -fsS https://api.beardworks.io/health && exit 0; sleep 10; done
+          echo "::warning::api.beardworks.io/health가 아직 응답하지 않는다(첫 배포면 인증서가 만들어지는 중일 수 있다)"
