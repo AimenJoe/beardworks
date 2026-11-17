@@ -21,4 +21,7 @@ node tools/render_banner.js   # 배너 1500×500 + 링크 미리보기 og-1200x6
 
 글꼴: [Galmuri](https://github.com/quiple/galmuri)(SIL OFL 1.1, `fonts/OFL.md`). 게임 그림(`img/nail.png`)은 Naïl 공식 페이지의 것과 같다. `img/knellroot.jpg`는 Knellroot 소개 페이지의 `site/img/s_duel.png`(게임 화면)를 640×360으로 줄인 것.
 
+## ops/ — Cloudflare Worker
+`api.beardworks.io`의 작은 Worker(매일 아침 점검 + 공식 페이지용 Releases 캐시). 페이지와 따로 `.github/workflows/ops.yml`이 배포한다. 자세한 것은 [`ops/README.md`](ops/README.md).
+
 © 2026 Beardworks

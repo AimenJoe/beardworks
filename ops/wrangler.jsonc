@@ -1,0 +1,14 @@
+{
+  // beardworks-ops — 매일 점검 + 공식 페이지용 Releases 캐시. 설명은 README.md.
+  // 계정 ID는 CLOUDFLARE_ACCOUNT_ID(CI 변수), 비밀 값(ALERT_TO·GITHUB_TOKEN)은 레포에 두지 않는다.
+  "name": "beardworks-ops",
+  "main": "src/index.js",
+  "compatibility_date": "2026-11-01",
+  "routes": [{ "pattern": "api.beardworks.io", "custom_domain": true }],
+  // 매일 22:17 UTC = 한국 07:17. 무료판은 계정당 Cron 다섯.
+  "triggers": { "crons": ["17 22 * * *"] },
+  // 받는 사람 제한 없음: 보내기 도메인을 등록하기 전엔 확인된 메일함으로만 갈 수 있다(무료). 받는 주소는 비밀 값 ALERT_TO.
+  "send_email": [{ "name": "EMAIL" }],
+  "observability": { "enabled": true },
+  "workers_dev": false
+}
