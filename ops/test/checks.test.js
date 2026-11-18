@@ -62,6 +62,13 @@ test("비공개 에셋이 404면 알린다(2026-11-10 같은 일)", async () => 
   assert.ok(fetchFn.calls.every((c) => c.method === "HEAD"), "HEAD로만 — 그림을 받지 않는다");
 });
 
+test("HEAD에 길이가 없으면(Cloudflare 정적 파일) 받아서 잰다", async () => {
+  const fetchFn = fakeFetch({ "https://p/a/x.png": ok("png"), "https://p/a/e.png": ok("") });
+  const rs = await checkVendor(fetchFn, "https://p", ["a/x.png", "a/e.png"]);
+  assert.deepEqual(rs.map((r) => r.ok), [true, false]);
+  assert.deepEqual(fetchFn.calls.map((c) => c.method), ["HEAD", "GET", "HEAD", "GET"]);
+});
+
 test("페이지는 200이고 HTML이 끝까지 와야 정상", async () => {
   const fetchFn = fakeFetch({ "https://a/": ok("<html></html>"), "https://b/": ok("<html>잘림") });
   assert.equal((await checkPage(fetchFn, "https://a/")).ok, true);
