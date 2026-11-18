@@ -15,6 +15,8 @@ export const PAGES = [
   "https://nail.beardworks.io/en/",
   "https://knellroot.beardworks.io/",
   "https://knellroot.beardworks.io/en/",
+  // nail 옛 운영 주소 — 기록을 들고 /play/로 넘기는 페이지(nail 0294, 2026-11-18).
+  "https://nail-under-the-roots.netlify.app/",
 ];
 
 // 게임 웹판. 운영 = main, 개발판 = 가장 높은 release/* 갈래. build.txt 첫 낱말이 그 갈래 머리 커밋이어야 한다.
@@ -24,7 +26,8 @@ const SUNNY = "assets/vendor/sunnyside/Sunnyside_World_ASSET_PACK_V2.1/Sunnyside
 export const GAMES = [
   {
     repo: "nail-under-the-roots",
-    prod: "https://nail-under-the-roots.netlify.app",
+    // 운영 = Cloudflare Worker web-game(nail 0294, 2026-11-18). 개발판은 Netlify 그대로.
+    prod: "https://nail.beardworks.io/play",
     dev: "https://dev--nail-under-the-roots.netlify.app",
     flavor: true,
     vendor: [

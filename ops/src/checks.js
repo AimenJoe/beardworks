@@ -56,7 +56,12 @@ export async function checkVendor(fetchFn, site, paths) {
     const what = `에셋 ${site.replace("https://", "")}/…/${p.split("/").pop()}`;
     try {
       const r = await fetchT(fetchFn, `${site}/${p}`, { method: "HEAD" });
-      const len = Number(r.headers.get("content-length") || "0");
+      let len = Number(r.headers.get("content-length") || "0");
+      // Cloudflare Workers 정적 파일은 HEAD에 content-length를 주지 않는다(nail /play, 2026-11-19 확인) — 그때만 받아서 잰다.
+      if (r.status === 200 && !len) {
+        const g = await fetchT(fetchFn, `${site}/${p}`);
+        len = g.status === 200 ? (await g.arrayBuffer()).byteLength : 0;
+      }
       if (r.status !== 200) out.push({ ok: false, what, detail: `HTTP ${r.status} — 비공개 에셋 없이 빌드됐을 수 있다` });
       else if (!len) out.push({ ok: false, what, detail: "크기 0" });
       else out.push({ ok: true, what });
