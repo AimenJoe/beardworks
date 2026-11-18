@@ -4,6 +4,9 @@
   "name": "beardworks-ops",
   "main": "src/index.js",
   "compatibility_date": "2026-11-01",
+  // 점검이 방문자와 같은 길로 보게(2026-11-19): 이것 없이는 같은 영역(beardworks.io)으로의 fetch가 다른 Worker의 route를
+  // 건너뛰고 원본(GitHub Pages)으로 간다 — nail /play(Worker web-game)를 404로 보고, 와일드카드 route가 페이지를 가로챈 것도 못 봤다.
+  "compatibility_flags": ["global_fetch_strictly_public"],
   "routes": [{ "pattern": "api.beardworks.io", "custom_domain": true }],
   // 매일 22:17 UTC = 한국 07:17. 무료판은 계정당 Cron 다섯.
   "triggers": { "crons": ["17 22 * * *"] },
