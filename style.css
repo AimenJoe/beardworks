@@ -119,3 +119,7 @@ footer p { margin: .3rem 0; }
 .form-status { color: var(--muted); min-height: 1.4em; }
 .form-status.ok { color: var(--moss); }
 #contact-turnstile { width: 100%; min-height: 65px; }
+.tbl { overflow-x: auto; margin: 1rem 0; }
+.tbl table { border-collapse: collapse; width: 100%; min-width: 34rem; font-size: .92rem; }
+.tbl th, .tbl td { border: 1px solid var(--soil-3); padding: .45rem .6rem; text-align: left; vertical-align: top; word-break: keep-all; overflow-wrap: anywhere; }
+.tbl th { background: var(--soil-2); color: var(--muted); font-weight: 400; }
