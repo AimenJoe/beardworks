@@ -24,6 +24,12 @@
 
 `POST /check`(헤더 `Authorization: Bearer <CHECK_KEY>`) — 지금 점검하고 결과와 상관없이 메일(시험 발송). `CHECK_KEY`는 배포마다 CI가 새로 만들어 넣으므로 쓰는 길은 하나: Actions → ops → Run workflow에서 **test_mail** 켜기.
 
+## 3. 문의 양식 — `POST /contact`
+- 첫 페이지 "연락"의 양식(`contact.js`)이 보낸 종류·이름·이메일·내용을 **메일 한 통**으로 운영자 메일함(비밀 값 `CONTACT_TO`)에 전한다. 답장 주소(Reply-To)는 보낸 사람 — 메일함에서 답장만 누르면 된다. **저장하지 않는다**(개인정보처리방침 4절).
+- 스팸 막기: 출처는 `https://beardworks.io`만, Cloudflare Turnstile 토큰을 서버에서 다시 확인(`TURNSTILE_SECRET`), 숨은 미끼 칸(채우면 성공처럼 보이되 안 보냄), 길이 제한, IP마다 1분에 셋(`CONTACT_LIMIT`). IP는 세기만 하고 메일에 넣지 않는다.
+- 무료 메일 보내기는 확인된 받는 주소로만 간다 — 그래서 보낸 사람에게 "받았습니다" 자동 회신은 없고 화면에만 알린다.
+- 페이지의 Turnstile 사이트 키는 `contact.js`의 `SITEKEY`(공개 값). 비어 있으면 양식을 숨기고 메일 주소만 보인다.
+
 ## 돌려 보기
 ```sh
 cd ops
@@ -34,7 +40,7 @@ npx wrangler@4.156.2 dev --test-scheduled      # workerd에서. 점검 깨우기
 
 ## 배포
 `.github/workflows/ops.yml` — `main`에 `ops/**`가 바뀌어 들어오면 시험 → 배포(Environment `ops`). 필요한 값은 그 파일 머리에.
-처음 한 번: Environment `ops`(배포 갈래 main만)를 만들고 값 넷을 넣는다. 첫 배포가 `api.beardworks.io` 사용자 지정 도메인과 인증서를 만든다.
+처음 한 번: Environment `ops`(배포 갈래 main만)를 만들고 값을 넣는다 — `CLOUDFLARE_API_TOKEN`·`CLOUDFLARE_ACCOUNT_ID`·`OPS_ALERT_TO`·`OPS_GITHUB_TOKEN`, 문의 양식은 `OPS_TURNSTILE_SECRET`·`OPS_CONTACT_TO`(없으면 `/contact`는 503). 첫 배포가 `api.beardworks.io` 사용자 지정 도메인과 인증서를 만든다.
 
 ## 비용
 Workers 무료판: 요청 하루 10만·Cron 계정당 5(여기서 1)·확인된 내 메일함으로 보내는 메일은 무료. 정적이 아닌 요청(소식 캐시)은 요청으로 센다.

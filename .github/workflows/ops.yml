@@ -71,10 +71,12 @@ jobs:
         env:
           ALERT_TO: ${{ secrets.OPS_ALERT_TO }}
           GITHUB_TOKEN: ${{ secrets.OPS_GITHUB_TOKEN }}
+          TURNSTILE_SECRET: ${{ secrets.OPS_TURNSTILE_SECRET }}
+          CONTACT_TO: ${{ secrets.OPS_CONTACT_TO }}
         run: |
           CHECK_KEY=$(openssl rand -hex 32); echo "::add-mask::$CHECK_KEY"; echo "CHECK_KEY=$CHECK_KEY" >> "$GITHUB_ENV"
           export CHECK_KEY
-          node -e 'const o={};for(const k of ["ALERT_TO","GITHUB_TOKEN","CHECK_KEY"]) if(process.env[k]) o[k]=process.env[k]; require("fs").writeFileSync("/tmp/secrets.json", JSON.stringify(o))'
+          node -e 'const o={};for(const k of ["ALERT_TO","GITHUB_TOKEN","CHECK_KEY","TURNSTILE_SECRET","CONTACT_TO"]) if(process.env[k]) o[k]=process.env[k]; require("fs").writeFileSync("/tmp/secrets.json", JSON.stringify(o))'
           npx -y "$WRANGLER" secret bulk /tmp/secrets.json
           rm -f /tmp/secrets.json
       - name: Smoke

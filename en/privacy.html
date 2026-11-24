@@ -30,10 +30,10 @@
   <div class="wrap">
     <p class="tag">Beardworks</p>
     <h1>Privacy Policy</h1>
-    <p class="meta">Effective 2026-11-07 · Operated by Beardworks (털보네공업사, sole proprietorship, Republic of Korea) · Covers: Naïl: Under the Roots and Knellroot (all versions, including development builds), beardworks.io and its subdomains</p>
+    <p class="meta">Effective 2026-11-24 · Operated by Beardworks (털보네공업사, sole proprietorship, Republic of Korea) · Covers: Naïl: Under the Roots and Knellroot (all versions, including development builds), beardworks.io and its subdomains</p>
 
     <h2>In short</h2>
-    <p><b>Our game and this website do not collect personal data.</b> There are no accounts, ads, analytics or tracking cookies, and your progress is saved only on the device you play on. The store versions (Steam and the Epic Games Store) connect to your store account only to unlock achievements; your store account itself is covered by that store's own privacy policy. The only personal data we receive is an email you choose to send us.</p>
+    <p><b>Our games and this website do not collect personal data on their own.</b> There are no accounts, ads, analytics or tracking cookies, and your progress is saved only on the device you play on. The store versions (Steam and the Epic Games Store) connect to your store account only to unlock achievements; your store account itself is covered by that store's own privacy policy. The only personal data we receive is a message you choose to send us (by email or through the contact form).</p>
 
     <h2>1. What the game saves on your device</h2>
     <ul>
@@ -60,23 +60,25 @@
 
     <h2>3. Website, web version and downloads</h2>
     <ul>
-      <li>This website (beardworks.io, nail.beardworks.io and knellroot.beardworks.io), the downloads (APK and PC builds) and the source code are hosted by GitHub; the web version of the game is hosted by Netlify; DNS for the domain is handled by Cloudflare. The Naïl game page loads its latest news from GitHub.</li>
+      <li>This website (beardworks.io, nail.beardworks.io and knellroot.beardworks.io), the downloads (APK and PC builds) and the source code are hosted by GitHub; the web versions of the games are hosted by Cloudflare and Netlify; DNS for the domain is handled by Cloudflare. The Naïl game page loads its latest news from GitHub through our Cloudflare Worker (api.beardworks.io).</li>
       <li>When you visit, access logs such as your IP address and browser details may be kept in those companies' server logs. We do not receive or use those logs. Policies: <a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement">GitHub</a> · <a href="https://www.netlify.com/privacy/">Netlify</a> · <a href="https://www.cloudflare.com/privacypolicy/">Cloudflare</a></li>
-      <li>This website and the web version use no cookies. The web version stores (caches) the game files in your browser so it can start offline.</li>
+      <li>This website and the web version set no cookies of our own. Cloudflare, which sits in front of every page, sets a <code>cf_clearance</code> cookie as a security feature to tell automated traffic (bots) apart (up to one year; <a href="https://developers.cloudflare.com/fundamentals/reference/policies-compliances/cloudflare-cookies/">Cloudflare cookies</a>). It is not used for advertising or analytics, and we do not receive its contents. The contact form on the home page also runs Cloudflare Turnstile in your browser to check for bots (see section 4). The web version stores (caches) the game files in your browser so it can start offline.</li>
     </ul>
 
-    <h2>4. Emails to us</h2>
+    <h2>4. Emails and the contact form</h2>
     <ul>
-      <li>If you email <a href="mailto:support@beardworks.io">support@beardworks.io</a> (questions) or <a href="mailto:business@beardworks.io">business@beardworks.io</a> (work inquiries), we use your address and message <b>only to reply</b>. Mail is forwarded through Cloudflare Email Routing to the operator's Gmail and kept there (<a href="https://policies.google.com/privacy">Google Privacy Policy</a>).</li>
+      <li>If you email <a href="mailto:support@beardworks.io">support@beardworks.io</a> (questions) or <a href="mailto:business@beardworks.io">business@beardworks.io</a> (work inquiries), we use your address and message <b>only to reply</b>. Mail is forwarded through Cloudflare Email Routing to the operator's Outlook.com mailbox and kept there (<a href="https://privacy.microsoft.com/privacystatement">Microsoft Privacy Statement</a>).</li>
+      <li>If you use the <b>contact form</b> on our home page, your topic, name, email and message pass through a Cloudflare Worker (api.beardworks.io) and arrive as <b>a single email</b> in the same Outlook.com mailbox. The form's contents are <b>not stored</b> on this website or in the Worker, and are used only to reply.</li>
+      <li>The form uses Cloudflare Turnstile to block automated submissions. Turnstile processes only the browser and connection information (such as your IP address) needed to check for bots, and does not read what you write in the form (<a href="https://www.cloudflare.com/turnstile-privacy-policy/">Cloudflare Turnstile privacy addendum</a>). To prevent repeated submissions we briefly count requests per IP address, but we do not keep it in the email or any log.</li>
       <li>Ask us to delete it once your question is answered and we will. We never use it for anything else or share it.</li>
       <li>Anything you post on GitHub Issues is public on GitHub and covered by GitHub's policy.</li>
     </ul>
 
     <h2>5. Children</h2>
-    <p>We do not ask for age and do not collect personal data from anyone, including children. If we learn that a child has emailed us, we delete the message after replying.</p>
+    <p>We do not ask for age and do not collect personal data from anyone, including children. If we learn that a child has contacted us, we delete the message after replying.</p>
 
     <h2>6. Your rights and contact</h2>
-    <p>The only personal data we hold is email you sent us, and you can ask to see or delete it. For data in your store account, contact that store. Privacy contact: the owner of Beardworks, <a href="mailto:support@beardworks.io">support@beardworks.io</a></p>
+    <p>The only personal data we hold is messages you sent us (by email or the contact form), and you can ask to see or delete it. For data in your store account, contact that store. Privacy contact: the owner of Beardworks, <a href="mailto:support@beardworks.io">support@beardworks.io</a></p>
 
     <h2>7. Changes</h2>
     <p>If our games or website ever start handling new data, we will update this page first and change the effective date. Earlier versions are in the <a href="https://github.com/AimenJoe/beardworks/commits/main/privacy.html">change history</a>.</p>

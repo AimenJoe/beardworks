@@ -152,6 +152,23 @@
     <p class="ask">필요한 작업 내용과 희망 일정을 <a href="mailto:business@beardworks.io">business@beardworks.io</a>로 적어 보내 주시면, 요청하신 작업의 범위와 일정을 검토한 뒤 답변드리겠습니다.</p>
 
     <h2 id="contact">연락</h2>
+    <form id="contact-form" class="contact-form" hidden>
+      <p class="note">여기서 바로 보내거나, 아래 메일 주소로 보내 주세요.</p>
+      <label>종류
+        <select name="kind" required>
+          <option value="work">개발 의뢰 · 상담</option>
+          <option value="game">게임 문의 · 기술 지원</option>
+        </select>
+      </label>
+      <label>이름 <input name="name" required maxlength="100" autocomplete="name"></label>
+      <label>이메일 <input name="email" type="email" required maxlength="254" autocomplete="email"></label>
+      <label>내용 <textarea name="message" required minlength="10" maxlength="5000" rows="6"></textarea></label>
+      <label class="trap" aria-hidden="true">웹사이트 <input name="website" tabindex="-1" autocomplete="off"></label>
+      <div id="contact-turnstile"></div>
+      <p class="note">보내신 이름·이메일·내용은 답장을 위해 운영자 메일함으로만 전달되고, 이 사이트에는 저장하지 않습니다. 봇 확인에 Cloudflare Turnstile을 씁니다. <a href="privacy.html">개인정보처리방침</a></p>
+      <p><button type="submit">보내기</button></p>
+      <p id="contact-status" class="form-status" role="status" aria-live="polite"></p>
+    </form>
     <dl class="contact">
       <dt>개발 의뢰 · 상담</dt><dd><a href="mailto:business@beardworks.io">business@beardworks.io</a></dd>
       <dt>게임 문의 · 기술 지원</dt><dd><a href="mailto:support@beardworks.io">support@beardworks.io</a></dd>
@@ -166,5 +183,6 @@
     <p>상호 털보네공업사 · 사업자등록번호 207-19-64311</p>
   </div>
 </footer>
+<script src="contact.js" defer></script>
 </body>
 </html>

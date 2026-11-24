@@ -96,6 +96,23 @@
     <p class="ask">Email a brief description of your project and your expected timeline to <a href="mailto:business@beardworks.io">business@beardworks.io</a>. We will review the scope and timeline and get back to you.</p>
 
     <h2 id="contact">Contact</h2>
+    <form id="contact-form" class="contact-form" hidden>
+      <p class="note">Send us a message here, or email one of the addresses below.</p>
+      <label>Topic
+        <select name="kind" required>
+          <option value="work">Development projects · consulting</option>
+          <option value="game">Game inquiries · support</option>
+        </select>
+      </label>
+      <label>Name <input name="name" required maxlength="100" autocomplete="name"></label>
+      <label>Email <input name="email" type="email" required maxlength="254" autocomplete="email"></label>
+      <label>Message <textarea name="message" required minlength="10" maxlength="5000" rows="6"></textarea></label>
+      <label class="trap" aria-hidden="true">Website <input name="website" tabindex="-1" autocomplete="off"></label>
+      <div id="contact-turnstile"></div>
+      <p class="note">Your name, email and message are forwarded to our mailbox only so that we can reply; this site does not store them. Cloudflare Turnstile is used to check for bots. <a href="privacy.html">Privacy policy</a></p>
+      <p><button type="submit">Send</button></p>
+      <p id="contact-status" class="form-status" role="status" aria-live="polite"></p>
+    </form>
     <dl class="contact">
       <dt>Development projects · consulting</dt><dd><a href="mailto:business@beardworks.io">business@beardworks.io</a></dd>
       <dt>Game inquiries · support</dt><dd><a href="mailto:support@beardworks.io">support@beardworks.io</a></dd>
@@ -110,5 +127,6 @@
     <p>Business name 털보네공업사 (Beardworks) · Korean business registration no. 207-19-64311</p>
   </div>
 </footer>
+<script src="../contact.js" defer></script>
 </body>
 </html>
