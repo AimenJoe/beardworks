@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Contact · Beardworks</title>
+<meta name="description" content="Send Beardworks a development project, technical question or game inquiry.">
+<link rel="icon" href="../img/logo-tile.svg" type="image/svg+xml">
+<link rel="icon" href="../img/favicon.png" type="image/png">
+<link rel="alternate" hreflang="ko" href="https://beardworks.io/contact.html">
+<link rel="alternate" hreflang="en" href="https://beardworks.io/en/contact.html">
+<link rel="alternate" hreflang="x-default" href="https://beardworks.io/contact.html">
+<link rel="canonical" href="https://beardworks.io/en/contact.html">
+<meta name="theme-color" content="#17130f">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="./"><img src="../img/logo-tile.svg" alt="" width="32" height="32">Beardworks</a>
+    <nav aria-label="Elsewhere">
+      <a href="./">About us</a>
+      <a class="lang" href="../contact.html" hreflang="ko" lang="ko">한국어</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap">
+    <p class="tag">Beardworks</p>
+    <h1>Contact us</h1>
+    <form id="contact-form" class="contact-form" hidden>
+      <p class="note">Send us a message here, or use one of our <a href="./#contact">email addresses</a>.</p>
+      <label>Topic
+        <select name="kind" required>
+          <option value="work">Development projects · consulting</option>
+          <option value="game">Game inquiries · support</option>
+        </select>
+      </label>
+      <label>Name <input name="name" required maxlength="100" autocomplete="name"></label>
+      <label>Email <input name="email" type="email" required maxlength="254" autocomplete="email"></label>
+      <label>Message <textarea name="message" required minlength="10" maxlength="5000" rows="6"></textarea></label>
+      <label class="trap" aria-hidden="true">Website <input name="website" tabindex="-1" autocomplete="off"></label>
+      <div id="contact-turnstile"></div>
+      <p class="note">Your name, email and message are forwarded to our mailbox only so that we can reply; this site does not store them. Cloudflare Turnstile is used to check for bots. <a href="privacy.html">Privacy policy</a></p>
+      <p><button type="submit">Send</button></p>
+      <p id="contact-status" class="form-status" role="status" aria-live="polite"></p>
+    </form>
+    <p class="note" id="contact-off">If the form does not open, email <a href="mailto:business@beardworks.io">business@beardworks.io</a> (projects · consulting) or <a href="mailto:support@beardworks.io">support@beardworks.io</a> (games).</p>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 Beardworks (털보네공업사) · Republic of Korea · <a href="privacy.html">Privacy policy</a></p>
+    <p>Business name 털보네공업사 (Beardworks) · Korean business registration no. 207-19-64311</p>
+  </div>
+</footer>
+<script src="../contact.js" defer></script>
+</body>
+</html>
