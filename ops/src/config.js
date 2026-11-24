@@ -55,3 +55,7 @@ export const ALERT_FROM = { email: "ops@beardworks.io", name: "Beardworks 점검
 
 // 이상이 없어도 이 요일(한국 시간)엔 "살아 있음" 메일 — 점검기 자체가 죽은 걸 알아채려고. 0 = 일요일.
 export const HEARTBEAT_WEEKDAY_KST = 1;
+
+// 문의 양식(contact.js): 보내는 주소와 양식을 둘 수 있는 페이지의 출처. 받는 곳은 비밀 값 CONTACT_TO(확인된 메일함).
+export const CONTACT_FROM = { email: "contact@beardworks.io", name: "Beardworks 문의" };
+export const CONTACT_ORIGINS = ["https://beardworks.io"];

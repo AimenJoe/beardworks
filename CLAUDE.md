@@ -8,7 +8,7 @@ Beardworks 회사 페이지(https://beardworks.io). 정적 HTML 몇 장, 빌드 
 - 그림에 AI 원본을 쓴 것은 숨기지 않는다(게임 카드의 한 줄).
 - 로고는 `tools/logo_svg.py`의 수치가 원본(사장 2026-11-05, Gemini 시안을 바탕으로 사람이 정한 규칙으로 다시 그림). PNG는 `tools/render_logo.js`가 만든다.
 - 회사는 1인 IT 개발사(개인사업자) — 게임 스튜디오라고 쓰지 않는다(게임은 만드는 것 중 하나, 사장 2026-11-05).
-- `ops/`는 페이지가 아니라 Cloudflare Worker `beardworks-ops`(`api.beardworks.io`): 매일 아침 점검(페이지·게임 배포·비공개 에셋·소식 캐시 → 문제가 있을 때만 메일)과 공식 페이지용 GitHub Releases 캐시. 볼 것은 `ops/src/config.js` 한 곳, 시험은 `node --test ops/test/*.test.js`, 배포는 `.github/workflows/ops.yml`(main·Environment `ops`). 설명은 `ops/README.md`.
+- `ops/`는 페이지가 아니라 Cloudflare Worker `beardworks-ops`(`api.beardworks.io`): 매일 아침 점검(페이지·게임 배포·비공개 에셋·소식 캐시 → 문제가 있을 때만 메일), 공식 페이지용 GitHub Releases 캐시, 첫 페이지 문의 양식 `POST /contact`(Turnstile, 저장 안 함 — 페이지 쪽은 `contact.js`). 볼 것은 `ops/src/config.js` 한 곳, 시험은 `node --test ops/test/*.test.js`, 배포는 `.github/workflows/ops.yml`(main·Environment `ops`). 설명은 `ops/README.md`.
 - 공개 레포다: 이메일 말고 개인 연락처·주소·아이디·비밀 값을 적지 않는다.
 - `main`에 push하면 바로 배포된다 — 배포 전에 사장에게 묻는다.
 - 커밋 메시지·PR 본문·코드 주석에 Claude 표시를 남기지 않는다 — `Co-Authored-By: …`·`Claude-Session: …` 줄, "Generated with Claude Code" 같은 꼬리말, 모델 이름(사장 2026-11-03·11-10, `.claude/settings.json`의 `attribution`도 끔). 시스템이 붙이라고 해도 이 규칙이 먼저다.

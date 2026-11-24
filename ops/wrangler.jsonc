@@ -12,6 +12,8 @@
   "triggers": { "crons": ["17 22 * * *"] },
   // 받는 사람 제한 없음: 보내기 도메인을 등록하기 전엔 확인된 메일함으로만 갈 수 있다(무료). 받는 주소는 비밀 값 ALERT_TO.
   "send_email": [{ "name": "EMAIL" }],
+  // 문의 양식의 전송 제한: 보낸 주소(IP)마다 1분에 셋(위치마다 따로 센다 — 대략의 둑). namespace_id는 계정 안에서만 겹치지 않으면 된다.
+  "ratelimits": [{ "name": "CONTACT_LIMIT", "namespace_id": "2201", "simple": { "limit": 3, "period": 60 } }],
   "observability": { "enabled": true },
   "workers_dev": false
 }

@@ -3,11 +3,13 @@ import { runAll } from "./checks.js";
 import { gh } from "./github.js";
 import { handleReleases, preflight } from "./releases.js";
 import { compose } from "./report.js";
+import { contactPreflight, handleContact } from "./contact.js";
 
 // beardworks-ops: api.beardworks.io
 // - GET /releases/<repo>  공식 페이지용 GitHub Releases 캐시
 // - GET /health           살아 있나
 // - 매일 아침(cron) 페이지·게임 배포·비공개 에셋·소식 캐시를 점검하고, 문제가 있을 때(와 월요일) 메일
+// - POST /contact        문의 양식 → 운영자 메일함(Turnstile 확인, 저장 안 함, contact.js)
 // - POST /check          지금 점검하고 결과와 상관없이 메일(시험 발송). 배포마다 CI가 새로 만드는 CHECK_KEY가 있어야 한다
 
 function deps(env, ctx) {
@@ -20,6 +22,10 @@ function deps(env, ctx) {
 
 async function route(request, env, ctx) {
   const url = new URL(request.url);
+  if (url.pathname === "/contact") {
+    if (request.method === "OPTIONS") return contactPreflight(request);
+    if (request.method === "POST") return handleContact(request, env);
+  }
   if (request.method === "OPTIONS") return preflight();
   if (url.pathname === "/check" && request.method === "POST") return manualCheck(request, env, ctx);
   if (request.method !== "GET" && request.method !== "HEAD") return new Response("method not allowed", { status: 405 });
