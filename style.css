@@ -94,3 +94,7 @@ footer p { margin: .3rem 0; }
 .contact dd { margin: 0; }
 @media (max-width: 480px) { .contact { grid-template-columns: 1fr; } .contact dd { margin-bottom: .5rem; } }
 @media (min-width: 620px) { .services li:last-child:nth-child(odd) { grid-column: 1 / -1; } }
+
+/* 해 온 일(work.html): 프로젝트 제목 옆의 기간. */
+.when { font-family: var(--f-body); font-size: .85rem; color: var(--muted); margin-left: .4rem; white-space: nowrap; }
+.more { margin-top: .8rem; }

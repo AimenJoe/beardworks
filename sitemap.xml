@@ -28,4 +28,18 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://beardworks.io/en/privacy.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://beardworks.io/privacy.html"/>
   </url>
+  <url>
+    <loc>https://beardworks.io/work.html</loc>
+    <lastmod>2026-11-24</lastmod>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://beardworks.io/work.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://beardworks.io/en/work.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://beardworks.io/work.html"/>
+  </url>
+  <url>
+    <loc>https://beardworks.io/en/work.html</loc>
+    <lastmod>2026-11-24</lastmod>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://beardworks.io/work.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://beardworks.io/en/work.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://beardworks.io/work.html"/>
+  </url>
 </urlset>
