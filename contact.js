@@ -2,7 +2,7 @@
 // Turnstile 사이트 키가 비어 있으면 양식을 숨기고 메일 주소 안내만 남긴다(키는 Cloudflare 대시보드 → Turnstile에서 만든다).
 (function () {
   "use strict";
-  var SITEKEY = "0x4AAAAAAGQeV8vKza3nQvqs";
+  var SITEKEY = "";
   var ENDPOINT = "https://api.beardworks.io/contact";
   var form = document.getElementById("contact-form");
   if (!form || !SITEKEY) return;
