@@ -85,7 +85,12 @@ export async function handleContact(request, env, { fetchFn = fetch, nowMs = Dat
   })
     .then((r) => r.json())
     .catch(() => ({ success: false }));
-  if (!check.success || !CONTACT_HOSTNAMES.includes(check.hostname)) return reply(request, 400, { ok: false, error: "bot" });
+  if (!check.success || !CONTACT_HOSTNAMES.includes(check.hostname)) {
+    // 왜 막혔는지(Cloudflare 오류 코드·hostname)를 응답과 로그에 — 개인정보는 없다(코드와 호스트 이름뿐).
+    const codes = check.success ? [`hostname:${check.hostname || "-"}`] : (check["error-codes"] || ["unknown"]);
+    console.log(JSON.stringify({ contact: "turnstile failed", codes }));
+    return reply(request, 400, { ok: false, error: "bot", codes });
+  }
 
   const mail = composeContact(v, nowMs);
   try {

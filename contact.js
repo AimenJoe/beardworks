@@ -50,7 +50,7 @@
     e.preventDefault();
     var data = new URLSearchParams(new FormData(form));
     data.set("lang", lang);
-    if (!data.get("cf-turnstile-response")) return say(T.bot);
+    if (!data.get("cf-turnstile-response")) return say(T.bot + " (no-token)");
     button.disabled = true;
     say(T.sending);
     fetch(ENDPOINT, { method: "POST", body: data })
@@ -60,7 +60,8 @@
           form.reset();
           say(T.sent, true);
         } else {
-          say(j.error === "bot" ? T.bot : j.error === "rate" ? T.rate : ["kind", "name", "email", "message"].indexOf(j.error) >= 0 ? T.field : T.fail);
+          var code = j.codes && j.codes.length ? " (" + j.codes.join(", ") + ")" : "";
+          say((j.error === "bot" ? T.bot : j.error === "rate" ? T.rate : ["kind", "name", "email", "message"].indexOf(j.error) >= 0 ? T.field : T.fail) + code);
         }
       })
       .catch(function () { say(T.fail); })

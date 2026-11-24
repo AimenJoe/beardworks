@@ -52,7 +52,9 @@ test("Turnstile을 통과하지 못하면 보내지 않는다", async () => {
   const e = env();
   const r = await handleContact(req(good), e, { fetchFn: turnstile(false) });
   assert.equal(r.status, 400);
-  assert.equal((await r.json()).error, "bot");
+  const j = await r.json();
+  assert.equal(j.error, "bot");
+  assert.ok(Array.isArray(j.codes), "원인 코드를 돌려준다");
   assert.equal(e.sent.length, 0);
 });
 
