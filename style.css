@@ -26,7 +26,7 @@ a { color: var(--glow); }
 a:focus-visible { outline: 2px solid var(--glow); outline-offset: 3px; }
 .skip { position: absolute; left: -999px; top: 0; z-index: 50; background: var(--glow); color: var(--soil); padding: .4rem .8rem; }
 .skip:focus { left: 8px; top: 8px; }
-.wrap { max-width: 52rem; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.wrap { max-width: 52rem; margin: 0 auto; padding-left: max(22px, env(safe-area-inset-left, 0px)); padding-right: max(22px, env(safe-area-inset-right, 0px)); }
 h1, h2, h3, .brand, .tag { font-family: var(--f-pixel); font-weight: 400; letter-spacing: .01em; text-wrap: balance; }
 
 .top { border-bottom: 1px solid rgba(255, 255, 255, .06); }

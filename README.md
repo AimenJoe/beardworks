@@ -6,6 +6,8 @@ Beardworks(한국어 상호 털보네공업사) 회사 페이지 — https://bea
 - `privacy.html` · `en/privacy.html`: 회사와 모든 게임에 걸친 개인정보처리방침 — Epic Account Services 브랜드 설정의 개인정보처리방침 URL
 - 게임마다의 페이지는 그 게임 레포가 하위 도메인으로 올린다(Naïl → https://nail.beardworks.io, `AimenJoe/nail-under-the-roots`의 `site/` · Knellroot → https://knellroot.beardworks.io, `AimenJoe/knellroot`의 `site/`)
 
+`style.css`·`contact.js`를 고치면 모든 페이지의 `?v=` 판 번호를 올린다 — 앞단의 Cloudflare가 브라우저에 4시간 담아 두게 해서(Browser Cache TTL), 번호를 안 올리면 다시 찾는 방문자에게 옛 판이 보인다(2026-11-24).
+
 글을 고치면 두 언어를 다 고치고 글꼴을 다시 줄인다:
 
 ```sh
