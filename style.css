@@ -97,4 +97,4 @@ footer p { margin: .3rem 0; }
 
 /* 해 온 일(work.html): 프로젝트 제목 옆의 기간. */
 .when { font-family: var(--f-body); font-size: .85rem; color: var(--muted); margin-left: .4rem; white-space: nowrap; }
-.more { margin-top: .8rem; }
+.more { margin: 1.1rem 0; }
