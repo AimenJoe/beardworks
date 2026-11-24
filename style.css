@@ -98,13 +98,18 @@ footer p { margin: .3rem 0; }
 /* 해 온 일(work.html): 프로젝트 제목 옆의 기간. */
 .when { font-family: var(--f-body); font-size: .85rem; color: var(--muted); margin-left: .4rem; white-space: nowrap; }
 .more { margin: 1.1rem 0; }
-.routes span { display: block; }
+.routes span { display: block; word-break: keep-all; }
+.form-status:empty { display: none; }
 .routes .mail { display: block; margin-top: .4rem; color: var(--text); font-size: 1rem; }
 
 /* 문의 양식(contact.js): 칸은 세로로, 미끼 칸은 화면 밖. */
-.contact-form { display: grid; gap: .8rem; max-width: 36rem; margin: 0 0 1.6rem; }
+.contact-form { display: grid; gap: .8rem; margin: 2rem 0 1.6rem; background: var(--soil-2); border: 1px solid var(--soil-3); border-radius: 6px; padding: 1.1rem 1.2rem 1.3rem; }
+.contact-form h2 { margin: 0; }
+.contact-form .pair { display: grid; gap: .8rem; }
+@media (min-width: 620px) { .contact-form .pair { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 820px) { .routes { grid-template-columns: repeat(3, 1fr); } .routes li:last-child:nth-child(odd) { grid-column: auto; } }
 .contact-form label { display: grid; gap: .3rem; color: var(--muted); font-size: .95rem; }
-.contact-form input, .contact-form select, .contact-form textarea { font: inherit; color: var(--text); background: var(--soil-2); border: 1px solid var(--soil-3); border-radius: 4px; padding: .5rem .6rem; width: 100%; }
+.contact-form input, .contact-form select, .contact-form textarea { font: inherit; color: var(--text); background: var(--soil); border: 1px solid var(--soil-3); border-radius: 4px; padding: .5rem .6rem; width: 100%; }
 .contact-form input:focus, .contact-form select:focus, .contact-form textarea:focus { outline: 2px solid var(--glow); outline-offset: 1px; }
 .contact-form textarea { resize: vertical; }
 .contact-form button { font-family: var(--f-pixel); font-size: 1rem; padding: .45rem 1.2rem; border-radius: 4px; border: 1px solid var(--glow); background: var(--glow); color: var(--soil); cursor: pointer; }
