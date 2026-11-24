@@ -98,6 +98,8 @@ footer p { margin: .3rem 0; }
 /* 해 온 일(work.html): 프로젝트 제목 옆의 기간. */
 .when { font-family: var(--f-body); font-size: .85rem; color: var(--muted); margin-left: .4rem; white-space: nowrap; }
 .more { margin: 1.1rem 0; }
+.routes span { display: block; }
+.routes .mail { display: block; margin-top: .4rem; color: var(--text); font-size: 1rem; }
 
 /* 문의 양식(contact.js): 칸은 세로로, 미끼 칸은 화면 밖. */
 .contact-form { display: grid; gap: .8rem; max-width: 36rem; margin: 0 0 1.6rem; }
