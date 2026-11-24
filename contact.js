@@ -1,4 +1,4 @@
-// 문의 양식(첫 페이지 "연락") — api.beardworks.io/contact로 보낸다(beardworks ops Worker, ops/src/contact.js).
+// 문의 양식(문의하기 페이지 contact.html·en/contact.html) — api.beardworks.io/contact로 보낸다(beardworks ops Worker, ops/src/contact.js).
 // Turnstile 사이트 키가 비어 있거나 OPEN이 거짓이면 양식을 숨기고 메일 주소 안내만 남긴다(키는 Cloudflare 대시보드 → Turnstile).
 (function () {
   "use strict";
@@ -33,7 +33,7 @@
 
   form.hidden = false;
   window.bwTurnstileReady = function () {
-    widget = window.turnstile.render("#contact-turnstile", { sitekey: SITEKEY, theme: "dark", language: lang });
+    widget = window.turnstile.render("#contact-turnstile", { sitekey: SITEKEY, theme: "dark", language: lang, size: "flexible" });
   };
   var s = document.createElement("script");
   s.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=bwTurnstileReady";
