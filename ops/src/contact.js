@@ -2,7 +2,7 @@
 // 저장하지 않는다: 받은 글은 메일 한 통이 되고 Worker에는 남지 않는다(개인정보처리방침 4절).
 // 스팸 막기: Cloudflare Turnstile 토큰을 서버에서 다시 확인(siteverify) + 숨은 미끼 칸 + 길이 제한 + 주소마다 전송 제한.
 // 무료 메일 보내기는 확인된 받는 주소로만 간다 → 받는 곳은 운영자 메일함 하나(비밀 값 CONTACT_TO), 답장 주소(Reply-To)는 보낸 사람.
-import { CONTACT_FROM, CONTACT_ORIGINS } from "./config.js";
+import { CONTACT_FROM, CONTACT_HOSTNAMES, CONTACT_ORIGINS } from "./config.js";
 
 const KINDS = { work: "개발 의뢰·상담", game: "게임 문의·지원" };
 const LIMITS = { name: 100, email: 254, message: 5000, minMessage: 10 };
@@ -85,7 +85,7 @@ export async function handleContact(request, env, { fetchFn = fetch, nowMs = Dat
   })
     .then((r) => r.json())
     .catch(() => ({ success: false }));
-  if (!check.success) return reply(request, 400, { ok: false, error: "bot" });
+  if (!check.success || !CONTACT_HOSTNAMES.includes(check.hostname)) return reply(request, 400, { ok: false, error: "bot" });
 
   const mail = composeContact(v, nowMs);
   try {

@@ -25,12 +25,12 @@ function env(over = {}) {
     ...over,
   };
 }
-const turnstile = (success) => async (url, init) => {
+const turnstile = (success, hostname = "beardworks.io") => async (url, init) => {
   assert.equal(url, "https://challenges.cloudflare.com/turnstile/v0/siteverify");
   const body = JSON.parse(init.body);
   assert.equal(body.secret, "secret");
   assert.equal(body.remoteip, "203.0.113.7");
-  return new Response(JSON.stringify({ success }));
+  return new Response(JSON.stringify({ success, hostname }));
 };
 
 test("문의 한 통 = 운영자에게 메일 한 통, 답장은 보낸 사람에게", async () => {
@@ -53,6 +53,13 @@ test("Turnstile을 통과하지 못하면 보내지 않는다", async () => {
   const r = await handleContact(req(good), e, { fetchFn: turnstile(false) });
   assert.equal(r.status, 400);
   assert.equal((await r.json()).error, "bot");
+  assert.equal(e.sent.length, 0);
+});
+
+test("다른 사이트에서 얻은 Turnstile 토큰(hostname이 다름)은 막는다", async () => {
+  const e = env();
+  const r = await handleContact(req(good), e, { fetchFn: turnstile(true, "evil.example") });
+  assert.equal(r.status, 400);
   assert.equal(e.sent.length, 0);
 });
 
