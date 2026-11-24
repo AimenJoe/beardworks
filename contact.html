@@ -41,7 +41,6 @@
     <p class="tag">Beardworks</p>
     <h1>문의하기</h1>
     <form id="contact-form" class="contact-form" hidden>
-      <p class="note">여기서 바로 보내거나, <a href="./#contact">메일 주소</a>로 보내 주세요.</p>
       <label>종류
         <select name="kind" required>
           <option value="work">개발 의뢰 · 상담</option>
@@ -57,7 +56,12 @@
       <p><button type="submit">보내기</button></p>
       <p id="contact-status" class="form-status" role="status" aria-live="polite"></p>
     </form>
-    <p class="note" id="contact-off">양식을 열 수 없으면 <a href="mailto:business@beardworks.io">business@beardworks.io</a>(개발 의뢰·상담) · <a href="mailto:support@beardworks.io">support@beardworks.io</a>(게임 문의)로 보내 주세요.</p>
+    <h2 id="mail">메일로 보내기</h2>
+    <p class="note">양식을 열 수 없거나 파일을 함께 보내려면 메일로 보내 주세요.</p>
+    <dl class="contact">
+      <dt>개발 의뢰 · 상담</dt><dd><a href="mailto:business@beardworks.io">business@beardworks.io</a></dd>
+      <dt>게임 문의 · 기술 지원</dt><dd><a href="mailto:support@beardworks.io">support@beardworks.io</a></dd>
+    </dl>
   </div>
 </main>
 
