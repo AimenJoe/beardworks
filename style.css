@@ -18,7 +18,7 @@
   color-scheme: dark;
 }
 * { box-sizing: border-box; }
-html { background: var(--core); }
+html { background: var(--core); -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 body { margin: 0; background: var(--soil); color: var(--text); font-family: var(--f-body); font-size: 17px; line-height: 1.7; overflow-x: hidden; overflow-wrap: anywhere; }
 img { max-width: 100%; height: auto; display: block; }
 .px { image-rendering: pixelated; image-rendering: crisp-edges; }
