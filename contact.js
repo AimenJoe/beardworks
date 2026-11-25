@@ -1,13 +1,11 @@
 // 문의 양식(문의하기 페이지 contact.html·en/contact.html) — api.beardworks.io/contact로 보낸다(beardworks ops Worker, ops/src/contact.js).
-// Turnstile 사이트 키가 비어 있거나 OPEN이 거짓이면 양식을 숨기고 메일 주소 안내만 남긴다(키는 Cloudflare 대시보드 → Turnstile).
+// 스크립트가 돌지 않으면 양식은 숨은 채로 남고, 페이지의 메일 주소 안내만 보인다(사이트 키는 Cloudflare 대시보드 → Turnstile).
 (function () {
   "use strict";
   var SITEKEY = "0x4AAAAAAGQeV8vKza3nQvqs";
   var ENDPOINT = "https://api.beardworks.io/contact";
-  // OPEN = false인 동안은 주소 끝이 #contact-test일 때만 양식이 보인다(공개 전 실제 시험용).
-  var OPEN = true;
   var form = document.getElementById("contact-form");
-  if (!form || !SITEKEY || !(OPEN || location.hash === "#contact-test")) return;
+  if (!form || !SITEKEY) return;
   var lang = document.documentElement.lang === "en" ? "en" : "ko";
   var T = {
     ko: {

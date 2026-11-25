@@ -1,4 +1,4 @@
-// 문의 양식(POST /contact) — beardworks.io의 "연락" 칸에서 보낸 글을 운영자 메일함으로 전한다.
+// 문의 양식(POST /contact) — beardworks.io 문의하기 페이지(contact.html)에서 보낸 글을 운영자 메일함으로 전한다.
 // 저장하지 않는다: 받은 글은 메일 한 통이 되고 Worker에는 남지 않는다(개인정보처리방침 4절).
 // 스팸 막기: Cloudflare Turnstile 토큰을 서버에서 다시 확인(siteverify) + 숨은 미끼 칸 + 길이 제한 + 주소마다 전송 제한.
 // 무료 메일 보내기는 확인된 받는 주소로만 간다 → 받는 곳은 운영자 메일함 하나(비밀 값 CONTACT_TO), 답장 주소(Reply-To)는 보낸 사람.

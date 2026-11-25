@@ -2,8 +2,10 @@
 
 Beardworks(한국어 상호 털보네공업사) 회사 페이지 — https://beardworks.io (GitHub Pages, `main` 갈래의 맨 위 폴더를 그대로 올린다. 도메인은 `CNAME`).
 
-- `index.html`(한국어) · `en/index.html`(영어): 회사 소개·만든 것(게임 카드)·일 맡기기·연락(용도별 메일)
-- `privacy.html` · `en/privacy.html`: 회사와 모든 게임에 걸친 개인정보처리방침 — Epic Account Services 브랜드 설정의 개인정보처리방침 URL
+- `index.html`(한국어) · `en/index.html`(영어): 회사 소개·만든 것(게임 카드)·일 맡기기·연락
+- `work.html` · `en/work.html`: 해 온 일(대표 경력)
+- `contact.html` · `en/contact.html` + `contact.js`: 문의하기 — 용건별 메일 주소와 양식(→ `ops/`의 `POST /contact`)
+- `privacy.html` · `en/privacy.html`: 회사와 모든 게임에 걸친 개인정보 처리방침 — Epic Account Services 브랜드 설정의 개인정보 처리방침 URL
 - 게임마다의 페이지는 그 게임 레포가 하위 도메인으로 올린다(Naïl → https://nail.beardworks.io, `AimenJoe/nail-under-the-roots`의 `site/` · Knellroot → https://knellroot.beardworks.io, `AimenJoe/knellroot`의 `site/`)
 
 `style.css`·`contact.js`를 고치면 모든 페이지의 `?v=` 판 번호를 올린다 — 앞단의 Cloudflare가 브라우저에 4시간 담아 두게 해서(Browser Cache TTL), 번호를 안 올리면 다시 찾는 방문자에게 옛 판이 보인다(2026-11-24).
